@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'base_style.css' %}">
+</head>
+<body>
+<div class="container">
+        <header class="header">
+            {% include 'movie/includes/header.html' %}
+        </header>
+
+        <main class="main">
+            {% block content %}
+
+                <h2>MAIN</h2>
+             <div class="movies">
+             MOVIES
+{#                 <div class="slider">#}
+{#                     list of items #}
+{##}
+{#                 </div>#}
+                 <br><br>
+                 <form action="">
+                     <input oninput="" name="search_block" type="text" placeholder="Фильтрация">
+                     <br><br>
+                     <button>Поиск</button>
+                 </form>
+             {% for movie in movies %}
+                 <h1>{{ movie.name }}</h1>
+{#             	<h1><a href="{% url 'movie_info' movie_id=movie.id %}">{{ movie.name }}</a></h1>#}
+             {% endfor %}
+
+             </div>
+
+                <div>
+                    <form action="" enctype="multipart/form-data" method="POST">
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
+                        <br>
+                        <button>Save</button>
+                    </form>
+                </div>
+            {% endblock %}
+        </main>
+
+        <footer class="footer">
+            {% include 'movie/includes/footer.html' %}
+        </footer>
+</div>
+</body>
+</html>
